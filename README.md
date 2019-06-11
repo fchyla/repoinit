@@ -1,0 +1,1 @@
+A small script to automate repository initialization and creation. I wanted to be able to create a new repository consistently with all the same elements.
