@@ -32,9 +32,20 @@ repoinit () {
     echo "# Syntax
 # secretfile filter=git-crypt diff=git-crypt
 # *.key filter=git-crypt diff=git-crypt" >> .gitattributes
-
+    while [[ $CREATE_REPO != [yn] ]]
+        do 
+            read -e -p "Create remote repository on github.com? [y/n]" CREATE_REPO
+        done
+case $CREATE_REPO in 
+    y)
     cd $WORK_DIR
     python3 repoinit.py $PROJECT_NAME
+    ;;
+    n)
+    echo "Local repository initialized"
+    exit
+    ;;
+    esac
 }
 
 repoinit $1
