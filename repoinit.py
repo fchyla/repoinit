@@ -5,8 +5,7 @@ import sys
 import requests
 import json
 
-#project_name = sys.argv[1]
-project_name = "plugin-rocketchat"
+project_name = sys.argv[1]
 
 config = configparser.ConfigParser()
 config.read('./repoinit.config')
@@ -15,10 +14,11 @@ repo_key = config['GH']['K1'] #import gh key
 token = 'token ' + repo_key
 
 github_auth_header = {'Authorization': token}
-github_api_url = "https://api.github.com/user/repos"
+github_api_url = "https://api.github.com"
 
+gh_list_repos_api = github_api_url + "/user/repos"
 
-r = requests.get(github_api_url, headers=github_auth_header)
+r = requests.get(gh_list_repos_api, headers=github_auth_header)
 
 parsed = json.loads(r.text)
 
@@ -28,3 +28,11 @@ for i in range(0, len(parsed)):
     
 print("Creating "+project_name)
 
+create_repo_payload = { 
+        "name": project_name,
+        }
+
+gh_create_repo_api = github_api_url + "/user/repos"
+create_repo = requests.post(gh_create_repo_api, headers=github_auth_header, data=json.dumps(create_repo_payload))
+
+print(create_repo.text)
