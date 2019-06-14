@@ -35,4 +35,13 @@ create_repo_payload = {
 # data in post converted to json
 create_repo = requests.post(gh_repos_api, headers=github_auth_header, data=json.dumps(create_repo_payload))
 
-print(create_repo.text)
+parsed = json.loads(create_repo.text)
+
+
+# check select+get_key vs get_key+select
+keys = ["ssh_url", "clone_url"]
+url_list = []
+for x in keys:
+    url_list.append(parsed[x])
+    
+
