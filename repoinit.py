@@ -16,9 +16,9 @@ token = 'token ' + repo_key
 github_auth_header = {'Authorization': token}
 github_api_url = "https://api.github.com"
 
-gh_list_repos_api = github_api_url + "/user/repos"
+gh_repos_api = github_api_url + "/user/repos"
 
-r = requests.get(gh_list_repos_api, headers=github_auth_header)
+r = requests.get(gh_repos_api, headers=github_auth_header)
 
 parsed = json.loads(r.text)
 
@@ -32,7 +32,7 @@ create_repo_payload = {
         "name": project_name,
         }
 
-gh_create_repo_api = github_api_url + "/user/repos"
-create_repo = requests.post(gh_create_repo_api, headers=github_auth_header, data=json.dumps(create_repo_payload))
+# data in post converted to json
+create_repo = requests.post(gh_repos_api, headers=github_auth_header, data=json.dumps(create_repo_payload))
 
 print(create_repo.text)
