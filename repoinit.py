@@ -39,9 +39,18 @@ parsed = json.loads(create_repo.text)
 
 
 # check select+get_key vs get_key+select
-keys = ["ssh_url", "clone_url"]
-url_list = []
-for x in keys:
-    url_list.append(parsed[x])
+keys = { "s" :"ssh_url", "h" : "clone_url"}
+#url_list = []
+#for x in keys:
+#    url_list.append(parsed[x])
     
+#print(url_list)
 
+selection =""
+
+while not selection == "s" or not selection == "h":
+        selection = input("Select repo link type, [s]sh or [h]ttp: ")
+        if selection == "s" or selection == "h":
+                break
+
+print(parsed[keys[selection]])

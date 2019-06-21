@@ -36,6 +36,7 @@ repoinit () {
         do 
             read -e -p "Create remote repository on github.com? [y/n]" CREATE_REPO
         done
+
 case $CREATE_REPO in 
     y)
     cd $WORK_DIR
