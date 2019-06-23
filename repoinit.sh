@@ -34,13 +34,25 @@ repoinit () {
 # *.key filter=git-crypt diff=git-crypt" >> .gitattributes
     while [[ $CREATE_REPO != [yn] ]]
         do 
-            read -e -p "Create remote repository on github.com? [y/n]" CREATE_REPO
+            read -e -p "Create remote repository on github.com? [y/n]: " CREATE_REPO
         done
 
 case $CREATE_REPO in 
     y)
-    cd $WORK_DIR
-    python3 repoinit.py $PROJECT_NAME
+    while [[ $URL_TYPE != [sh] ]]
+        do 
+            read -e -p "Initialize remote with [s]sh or [h]ttp: " URL_TYPE
+        done
+    GITHUB_REMOTE_URL=$(cd $WORK_DIR && python3 repoinit.py $PROJECT_NAME $URL_TYPE)
+    cd $PROJECTS_DIR/$PROJECT_NAME
+    pwd
+    echo "Adding README.md"
+    touch README.md
+    git add .
+    echo "Setting remote origin as $GITHUB_REMOTE_URL"
+    git remote add origin $GITHUB_REMOTE_URL
+    git commit -m "first commit"
+    git push -u origin master
     ;;
     n)
     echo "Local repository initialized"

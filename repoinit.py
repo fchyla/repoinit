@@ -6,6 +6,7 @@ import requests
 import json
 
 project_name = sys.argv[1]
+repo_url_type = sys.argv[2]
 
 config = configparser.ConfigParser()
 config.read('./repoinit.config')
@@ -26,7 +27,7 @@ for i in range(0, len(parsed)):
     if project_name in parsed[i]["name"]:
         sys.exit("Repository "+project_name+" exists")
     
-print("Creating "+project_name)
+#print("Creating "+project_name)
 
 create_repo_payload = { 
         "name": project_name,
@@ -37,20 +38,6 @@ create_repo = requests.post(gh_repos_api, headers=github_auth_header, data=json.
 
 parsed = json.loads(create_repo.text)
 
-
-# check select+get_key vs get_key+select
 keys = { "s" :"ssh_url", "h" : "clone_url"}
-#url_list = []
-#for x in keys:
-#    url_list.append(parsed[x])
-    
-#print(url_list)
 
-selection =""
-
-while not selection == "s" or not selection == "h":
-        selection = input("Select repo link type, [s]sh or [h]ttp: ")
-        if selection == "s" or selection == "h":
-                break
-
-print(parsed[keys[selection]])
+print(parsed[keys[repo_url_type]])
