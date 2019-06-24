@@ -47,7 +47,7 @@ case $CREATE_REPO in
     cd $PROJECTS_DIR/$PROJECT_NAME
     pwd
     echo "Adding README.md"
-    touch README.md
+    echo "$PROJECT_NAME" > README.md
     git add .
     echo "Setting remote origin as $GITHUB_REMOTE_URL"
     git remote add origin $GITHUB_REMOTE_URL
