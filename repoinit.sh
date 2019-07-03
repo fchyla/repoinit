@@ -53,6 +53,7 @@ case $CREATE_REPO in
     git remote add origin $GITHUB_REMOTE_URL
     git commit -m "first commit"
     git push -u origin master
+    
     ;;
     n)
     echo "Local repository initialized"
@@ -62,3 +63,4 @@ case $CREATE_REPO in
 }
 
 repoinit $1
+echo "New repo created $PROJECTS_DIR/$PROJECT_NAME"
