@@ -1,7 +1,6 @@
 #!/bin/bash
 repoinit () {
 
-    [ -n "$1" ] && mkdir -p $1
     git init
     git-crypt init
     touch .gitignore .gitattributes
@@ -12,3 +11,4 @@ repoinit () {
 }
 
 repoinit
+
