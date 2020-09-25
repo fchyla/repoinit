@@ -2,6 +2,7 @@
 
 add_pre_commit_check () {
 
+detect-secrets scan > .secrets.baseline
 echo "repos:
 - repo: https://github.com/Yelp/detect-secrets.git
   rev: v0.14.3
@@ -12,7 +13,8 @@ echo "repos:
 }
 
 add_gitignore() {
-    echo ".pre-commit-config.yaml" >> .gitignore
+    echo ".pre-commit-config.yaml
+    .secrets.baseline" >> .gitignore
 }
 
 add_gitattributes() {
