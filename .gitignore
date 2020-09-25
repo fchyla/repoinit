@@ -1,3 +1,4 @@
 *.json
 .vscode
 /tests
+.pre-commit-config.yaml
